@@ -15,7 +15,8 @@ jobs:
           python -m pip install nbconvert
       - name: Convert notebook
         run: |
-          nbconvert --to html Delhivery-DataEngg.ipynb
+          # nbconvert --to html Delhivery-DataEngg.ipynb
+          jupyter nbconvert --to html Delhivery-DataEngg.ipynb
       - name: Deploy
         uses: actions/deploy-pages@v1
         with:
