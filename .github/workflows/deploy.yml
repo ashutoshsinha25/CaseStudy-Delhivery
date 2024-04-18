@@ -1,0 +1,25 @@
+name: Deploy Notebook
+
+on:
+  push:
+    branches: [ main ]  # Trigger on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          python -m pip install nbconvert
+      - name: Convert notebook
+        run: |
+          # Replace 'your_notebook.ipynb' with your actual notebook filename
+          nbconvert --to html Delhivery-DataEngg.ipynb
+      - name: Deploy
+        uses: actions/deploy-pages@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source: ./  # Path to your converted notebook files
+          branch: gh-pages  # Name of the branch for deployment (usually gh-pages)
